@@ -1,0 +1,18 @@
+body {
+    margin:0px;
+    width:300px;
+} 
+button {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serifs;
+    font-size:11px;
+    border:none;
+    margin:1px;
+}
+.clicked {
+    background-color:blue;
+    color:white;
+}
+.unclicked {
+    background-color:lightgray;
+    color:black;
+}
