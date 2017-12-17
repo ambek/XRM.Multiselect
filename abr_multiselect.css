@@ -1,18 +1,34 @@
-body {
-    margin:0px;
-    width:300px;
-} 
+﻿body {
+    margin: 0px;
+    font-size: 11px;
+}
+
 button {
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serifs;
-    font-size:11px;
-    border:none;
-    margin:1px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serifs;
+    border: none;
+    margin: 1px;
 }
+
 .clicked {
-    background-color:blue;
-    color:white;
+    background-color: blue;
+    color: white;
 }
+
 .unclicked {
-    background-color:lightgray;
-    color:black;
+    background-color: lightgray;
+    color: black;
+}
+
+.required {
+    font-weight: bold;
+    font-size: 150%;
+    border-bottom: 3px solid red;
+    margin: 3px 1px 3px;
+}
+
+.recommended {
+    font-weight: bold;
+    font-size: 120%;
+    border-bottom: 3px solid darkorange;
+    margin: 3px 1px 3px;
 }

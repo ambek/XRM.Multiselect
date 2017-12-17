@@ -1,17 +1,21 @@
 ﻿<!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>Xrm.Multiselect</title>
-    <link href="abr_multiselect.css" rel="stylesheet" />
-
+    <link href="../Webresources/abr_multiselect.css" rel="stylesheet" />
 </head>
 <body>
-    <!-- ko foreach: myButtons -->
-        <button data-bind="click:registerClick, text:name, attr:{'class':className}"></button>
-    <!-- /ko -->
-    <!--<script type = src="jquery 1.7.2.min.js" </script>  -->
-    <script type="text/javascript" src="abr_knockout3.3.0.js"></script>
-    <script type="text/javascript" src="abr_multiselect.js"></script>
+    <div class="main">
+        <!-- ko foreach: myButtons -->
+        <!-- ko if: isRequired --><div style="display:block"></div><!-- /ko -->
+        <button data-bind="click:registerClick, text:label, attr:{'class':className}"></button>
+        <!-- /ko -->
+    </div>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
+    <script type="text/javascript" src="../Webresources/abr_multiselect.js"></script>
+    <script type="text/javascript">
+        ko.applyBindings(new XRMMultiselect.Controller());
+    </script>
 </body>
 </html>
