@@ -57,7 +57,7 @@ font-size: 110%;
     border-bottom: 3px solid darkorange;
 }
 
-// formatting below for fields that are setDisabled
+
 .true {
 background-color: lightcoral;
 pointer-events: none;
