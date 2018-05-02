@@ -40,11 +40,15 @@
                 this.label = this.ctrl.getLabel();
                 this.reqLevel = this.attr.getRequiredLevel();
                 this.isClicked = ko.observable(this.attr.getValue());
+                this.disabledState = this.ctrl.getDisabled();
                 this.className = ko.computed(() => {
-                    return (this.isClicked() ? "clicked" : "unclicked") + this.reqClassName();
+                    return (this.isClicked() ? "clicked" : "unclicked") + this.reqClassName() + _this.disabledClassName();
                 });
                 this.isRequired = ko.computed(() => {
                     return (this.reqLevel == 'required');
+                });
+                this.isDisabled = ko.computed(function () {
+                    return (_this.disabledState == 'disabled');
                 });
             }
             catch (ex) {
