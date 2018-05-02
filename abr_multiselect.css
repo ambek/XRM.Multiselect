@@ -1,17 +1,35 @@
-﻿body {
+body {
     margin: 0px;
-    font-size: 11px;
+    font-size: 10px;
 }
 
 button {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serifs;
     border: none;
     margin: 1px;
+    word-wrap: break-word;
+    width: 120px;
+    height: 60px;
+    float: left;   
+    margin: 3px;
 }
 
+button:hover {
+	background-color: white;
+	color: lightgray;
+	border: 2px solid lightgray;
+}
+
+
 .clicked {
-    background-color: blue;
+    background-color: #3fa6cc;
     color: white;
+}
+
+.clicked:hover {
+    background-color: white;
+    color: #3fa6cc;
+	border: 2px solid #3fa6cc;
 }
 
 .unclicked {
@@ -21,14 +39,27 @@ button {
 
 .required {
     font-weight: bold;
-    font-size: 150%;
+    font-size: 120%;
     border-bottom: 3px solid red;
-    margin: 3px 1px 3px;
+}
+
+.required:hover {
+    border-bottom: 3px solid red;
 }
 
 .recommended {
     font-weight: bold;
-    font-size: 120%;
+font-size: 110%;
     border-bottom: 3px solid darkorange;
-    margin: 3px 1px 3px;
 }
+
+.recommended:hover {
+    border-bottom: 3px solid darkorange;
+}
+
+
+.true {
+background-color: lightcoral;
+pointer-events: none;
+}
+
