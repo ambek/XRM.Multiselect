@@ -1,45 +1,45 @@
-﻿namespace XRMMultiselect {
-    export class Controller {
-        public myButtons: Array<ButtonViewModel>;
-        constructor() {
+var XRMMultiselect;
+(function (XRMMultiselect) {
+    var Controller = /** @class */ (function () {
+        function Controller() {
             this.onLoad();
         }
-        public onLoad() {
+        Controller.prototype.onLoad = function () {
+            var _this = this;
             if (typeof (Xrm) == 'undefined')
-                Xrm = (<any>parent).Xrm;
+                Xrm = parent.Xrm;
             this.myButtons = [];
-            let query = window.location.search.substring(1);
+            var query = window.location.search.substring(1);
             if (query != null && query.split('=').length > 1) {
-                let elements = query.split('=')[1];
+                var elements = query.split('=')[1];
                 elements = decodeURIComponent(elements);
-                let controls: Array<string>;
+                var controls = void 0;
                 try {
-                    var configuration: ConfigurationModel = JSON.parse(elements);
+                    var configuration = JSON.parse(elements);
                     controls = [];
                     controls = controls.concat(configuration.Fields);
                     controls = controls.concat(this.getControlsFromSections(configuration.Sections));
                 }
                 catch (error) {
-                    console.log(error)
+                    console.log(error);
                     controls = elements.split(';');
                 }
-                controls.forEach((ctrl) => {
+                controls.forEach(function (ctrl) {
                     if (ctrl != null)
-                        this.myButtons.push(new ButtonViewModel(ctrl.trim()));
+                        _this.myButtons.push(new ButtonViewModel(ctrl.trim()));
                 });
             }
-
             window.addEventListener('keydown', function (event) {
                 if (event.ctrlKey == true && event.which == 83 && event.shiftKey == false) {
                     event.preventDefault();
-                    (<any>window.parent).Xrm.Page.data.save();
+                    window.parent.Xrm.Page.data.save();
                 }
             });
-        }
-        private getControlsFromSections(sections: Array<SectionModel>): Array<string> {
-            let controls: Array<string> = [];
-            sections.forEach((section) => {
-                let xrmSection = Xrm.Page.ui.tabs.get(section.TabName).sections.get(section.SectionName);
+        };
+        Controller.prototype.getControlsFromSections = function (sections) {
+            var controls = [];
+            sections.forEach(function (section) {
+                var xrmSection = Xrm.Page.ui.tabs.get(section.TabName).sections.get(section.SectionName);
                 var xrmCtrls = xrmSection.controls.get();
                 for (var i = 0; i < xrmCtrls.length; i++) {
                     if (xrmCtrls[i].getAttribute().getAttributeType() == 'boolean')
@@ -47,27 +47,26 @@
                 }
             });
             return controls;
+        };
+        return Controller;
+    }());
+    XRMMultiselect.Controller = Controller;
+    var ConfigurationModel = /** @class */ (function () {
+        function ConfigurationModel() {
         }
-    }
-    export class ConfigurationModel {
-        public Fields: Array<string>;
-        public Sections: Array<SectionModel>;
-    }
-    export class SectionModel {
-        public TabName: string;
-        public SectionName: string;
-    }
-    export class ButtonViewModel {
-        public label: string;
-        public ctrl: any;
-        public attr: any;
-        public reqLevel: string;
-        public isClicked: KnockoutObservable<boolean>;
-        public className: KnockoutComputed<string>;
-        public isRequired: KnockoutComputed<boolean>;
-        public disabledState: KnockoutComputed<boolean>;
-        public isDisabled: KnockoutComputed<boolean>;
-        constructor(public controlName: string) {
+        return ConfigurationModel;
+    }());
+    XRMMultiselect.ConfigurationModel = ConfigurationModel;
+    var SectionModel = /** @class */ (function () {
+        function SectionModel() {
+        }
+        return SectionModel;
+    }());
+    XRMMultiselect.SectionModel = SectionModel;
+    var ButtonViewModel = /** @class */ (function () {
+        function ButtonViewModel(controlName) {
+            var _this = this;
+            this.controlName = controlName;
             try {
                 this.ctrl = Xrm.Page.ui.controls.get(controlName);
                 this.attr = Xrm.Page.getAttribute(controlName);
@@ -75,11 +74,11 @@
                 this.reqLevel = this.attr.getRequiredLevel();
                 this.isClicked = ko.observable(this.attr.getValue());
                 this.disabledState = this.ctrl.getDisabled();
-                this.className = ko.computed(() => {
-                    return (this.isClicked() ? 'clicked' : 'unclicked') + this.reqClassName() + this.disabledClassName();
+                this.className = ko.computed(function () {
+                    return (_this.isClicked() ? 'clicked' : 'unclicked') + _this.reqClassName() + _this.disabledClassName();
                 });
-                this.isRequired = ko.computed(() => {
-                    return (this.reqLevel == 'required');
+                this.isRequired = ko.computed(function () {
+                    return (_this.reqLevel == 'required');
                 });
                 this.isDisabled = ko.computed(function () {
                     return (this.disabledState == 'disabled');
@@ -89,24 +88,24 @@
                 console.log('Error on geting Xrm attribue', controlName, ex);
             }
         }
-        public reqClassName(): string {
+        ButtonViewModel.prototype.reqClassName = function () {
             if (this.reqLevel == 'none')
                 return '';
             else
                 return ' ' + this.reqLevel;
-        }
-        public disabledClassName(): string {
+        };
+        ButtonViewModel.prototype.disabledClassName = function () {
             if (this.disabledState)
                 return ' disabled';
             else
                 return '';
-        }
-        public registerClick() {
+        };
+        ButtonViewModel.prototype.registerClick = function () {
             this.isClicked(!this.isClicked());
             this.setValue(this.controlName, this.isClicked());
         };
-
-        public setValue(controlName, value) {
+        ;
+        ButtonViewModel.prototype.setValue = function (controlName, value) {
             try {
                 this.attr.setValue(value);
                 this.attr.setSubmitMode("always");
@@ -114,6 +113,10 @@
             catch (e) {
                 console.log("Error: setValue", controlName, e.message);
             }
-        }
-    }
-};
+        };
+        return ButtonViewModel;
+    }());
+    XRMMultiselect.ButtonViewModel = ButtonViewModel;
+})(XRMMultiselect || (XRMMultiselect = {}));
+;
+//# sourceMappingURL=abr_multiselect.js.map
